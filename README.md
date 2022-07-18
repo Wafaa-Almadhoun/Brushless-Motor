@@ -13,66 +13,70 @@
 
 
 ## Introduction
-Stepper motors are an ideal choice for accurately moving and positioning mechanical devices. Using techniques like microstepping the position of the motor shaft can be controlled with a great deal of precision, stepper Motors are used in a wide variety of devices ranging from 3D printers and CNC machines to DVD drives, heating ducts, and even analog clocks , stepper motors are DC motors that rotate in precise increments or “steps”.
+ A brushless DC electric motor , is a synchronous motor using a direct current (DC) electric power supply. It uses an electronic 
+ controller to switch DC currents to the motor windings producing magnetic fields which effectively rotate in space and which 
+ the permanent magnet rotor follows. The controller adjusts the phase and amplitude of the DC current pulses to control the 
+ speed and torque of the motor ,Brushless motors find applications in such places as computer peripherals (disk drives, printers), 
+ hand-held power tools, and vehicles ranging from model aircraft to automobiles. In modern washing machines, brushless DC motors have
+ allowed replacement of rubber belts and gearboxes by a direct-drive design
 
   ,We will cover several topics : 👍 
 
 
- 1. Unipolar Stepper with ULN2003.
- 2. Bipolar Stepper with L293D Motor Driver IC.
- 3. BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver . 
+ 1. Brushless Motor A2212 Controlled by Arduino and ESC .
+ 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
   
 
 
 ## Technologies
 Project is created with:
 * Arduino IDE 1.8.19 [To Downloud](https://www.arduino.cc/en/software)
-* Proteus [To Downloud](https://www.labcenter.com/simulation/)
+
 	
 ## Components required
-### 1. Unipolar Stepper with ULN2003 
-    1. Arduino UNO
-    2. 1 – 28BYJ-48 Unipolar Stepper
-    3. jumper wirs
-    4. driver board ULN2003
-    5. bettrey  5 and 12 volt 
-    6. breadboard
-    
-### 2. Bipolar Stepper with L293D Motor Driver IC
-    1. Arduino UNO
-    2. 1  NEMA 17 bipolar stepper
-    3. jumper wirs
-    4. L293D Motor Driver IC
-    5. bettrey  5 and 12 volt 
-    6. breadboard
-    
-### 3. BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver .
-    1. Arduino UNO
-    2. 1  NEMA 23 bipolar stepper
-    3. jumper wirs
-    4. DM860A Microstep Driver
-    5. bettrey 24 volt 
-    6. breadboard
-    7. push button 
-    8. 10 k ohm
-    9. potentiometer
+### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
+
+  Brushless Motor A2212
+  
+  ESC 30A 
+  
+  Li-Po battery 3 cells 
+  
+  Arduino Board 
+  
+  10 k ohm Potentiometer 
+  
+  Breadboard and Jump Wires …
+  
+ ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
+ 
     
 ## Connections
 
-### 1. Unipolar Stepper with ULN2003
+### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
 
-     connecting ULN2003 pin1 to pin 8 in Ardunio
-     connecting ULN2003 pin2 to pin 9 in Ardunio
-     connecting ULN2003 pin3 to pin 10 in Ardunio
-     connecting ULN2003 pin4 to pin 11 in Ardunio
-     connecting ULN2003 pin16 to pin1 in stepper
-     connecting ULN2003 pin15 to pin2 in stepper
-     connecting ULN2003 pin14 to pin3 in stepper
-     connecting ULN2003 pin13 to pin4 in stepper
-     connecting ULN2003 pin9 and the 2 2VDD pin in stepper motor to 12v battery 
-     Connect ground to ground
+     connect the three terminals of Brushless motor to the three terminals of the ESC
      
- ### 2. Bipolar Stepper with L293D Motor Driver IC
+     Screw the Motor to a heavy wooden plank anything similar so that it remains stable at high RPM
+     
+     Connect the signal wire of ESC white color PWM pin 9 in Arduino, 
+     
+     Connect the GND & V+ wire of ESC to  GND & V+  in Arduino,
+     
+     Connect the GND & V+ wire of ESC to  GND & V+  in Arduino,
+     
+     Connect the battery VCC  and GND battery wire of ESC to Li-Po battery
+     
+     Connecting GND in Ardunio to the one side of potentiometer
+     
+     Connecting +5v in Ardunio to the other side of potentiometer
+     
+     Connecting pin A0 in Ardunio to the signal of potentiometer
+     
+
+
+     
+ ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
  
     connecting 5V output on Arduino to the Vcc2 & Vcc1 pins
     
@@ -98,104 +102,44 @@ Project is created with:
      
      
 ## Block diagram & simulation
-### 1. Unipolar Stepper with ULN2003 . [see here](https://github.com/Wafaa-Almadhoun/Stepper-motor-using-Arduino-UNO-R3-/blob/main/stepper%20using%20ULN2003.pdsprj)
-##### Slow - 4-step CW sequence to observe lights on driver board
-![1](https://user-images.githubusercontent.com/64277741/179306291-f9684758-deaf-4828-9520-757a142ba537.PNG)
-Figure (1): Stepper Motor at 90 degree after 1-step CW sequence
-![2](https://user-images.githubusercontent.com/64277741/179307189-82e1089f-4cbb-403a-b78c-a4c990c24522.PNG)
-Figure (2): Stepper Motor at 180 degree after 2-step CW sequence
-![3](https://user-images.githubusercontent.com/64277741/179307421-bbcf698d-139f-4d30-aae9-9546c057fb68.PNG)
-Figure (3): Stepper Motor at 270 degree after 3-step CW sequence
-![4](https://user-images.githubusercontent.com/64277741/179307644-0f9d39bf-591d-45a1-b9c4-d38ec8528d7d.PNG)
-Figure (4): Stepper Motor at 342 degree after 4-step CW sequence
-##### Rotate CW 1/2 turn slowly
-![5](https://user-images.githubusercontent.com/64277741/179308867-85dbccdc-5070-4164-82c7-9776d4b09fc9.PNG)
-Figure (5): Rotate CW 1/2 turn slowly
-##### Rotate CCW 1/2 turn quickly
-![6](https://user-images.githubusercontent.com/64277741/179309329-1eed85e5-3f0d-48a3-b2be-3d9a40e71869.PNG)
-Figure (6): Rotate CCW 1/2 turn quickly
+### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
+
+![Untitled Sketch 4_bb](https://user-images.githubusercontent.com/64277741/179435815-1bd9a5ea-6ab4-4b05-a3c1-88ec4007e8c9.png)
+
+
+Figure (5): Block diagram and Connections of Brushless Motor A2212
+
+
 
 #### The Code 
- Demonstrates 28BYJ-48 Unipolar Stepper with ULN2003 Driver
- 
-  Uses Arduino Stepper Library
- 
-//Include the Arduino Stepper Library
+ #include <Servo.h>  //Using servo library to control ESC
 
-#include <Stepper.h>
- 
-// Define Constants
- 
-// Number of steps per internal motor revolution 
+Servo esc; //Creating a servo class with name as esc
 
-const float STEPS_PER_REV = 32; 
- 
-//  Amount of Gear Reduction
-
-const float GEAR_RED = 64;
- 
-// Number of steps per geared output rotation
-
-const float STEPS_PER_OUT_REV = STEPS_PER_REV * GEAR_RED;
- 
-// Define Variables
- 
-// Number of Steps Required
-
-int StepsRequired;
- 
-// Create Instance of Stepper Class
-
-// Specify Pins used for motor coils
-
-// The pins used are 8,9,10,11 
-
-// Connected to ULN2003 Motor Driver In1, In2, In3, In4 
-
-// Pins entered in sequence 1-3-2-4 for proper step sequencing
- 
-Stepper steppermotor(STEPS_PER_REV, 8, 10, 9, 11);
- 
 void setup()
+
 {
 
-// Nothing  (Stepper Library sets pins as outputs)
+esc.attach(9); //Specify the esc signal pin,Here as D8
+
+esc.writeMicroseconds(1000); //initialize the signal to 1000
+
+
 
 }
- 
+
 void loop()
+
 {
 
-  // Slow - 4-step CW sequence to observe lights on driver board
-  
-  steppermotor.setSpeed(1);    
-  
-  StepsRequired  =  4;
-  
-  steppermotor.step(StepsRequired);
-  
-  delay(2000);
- 
-   // Rotate CW 1/2 turn slowly
-   
-  StepsRequired  =  STEPS_PER_OUT_REV / 2; 
-  
-  steppermotor.setSpeed(100);   
-  
-  steppermotor.step(StepsRequired);
-  
-  delay(1000);
-  
-  // Rotate CCW 1/2 turn quickly
-  
-  StepsRequired  =  - STEPS_PER_OUT_REV / 2;   
-  
-  steppermotor.setSpeed(700);  
-  
-  steppermotor.step(StepsRequired);
-  
-  delay(2000);
- 
+int val; //Creating a variable val
+
+val= analogRead(A0); //Read input from analog pin a0 and store in val
+
+val= map(val, 0, 1023,1000,2000); //mapping val to minimum and maximum 
+
+esc.writeMicroseconds(val); //using val as the signal to esc
+
 }
 
 ### 2. Bipolar Stepper with L293D Motor Driver IC .[see here ](https://github.com/Wafaa-Almadhoun/Stepper-motor-using-Arduino-UNO-R3-/blob/main/Bipolar%20Stepper%20with%20L293D%20Motor%20Driver%20IC.pdsprj)
