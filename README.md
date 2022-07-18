@@ -87,11 +87,11 @@ Project is created with:
      
  ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
  
-      connecting pin18 in Ardunio uno to GPIO 2  in Odrive  
+      connecting pin18 in Ardunio mega to GPIO 2  in Odrive  
 
-      connecting pin19 in Ardunio uno to GPIO 1  in Odrive  
+      connecting pin19 in Ardunio mega to GPIO 1  in Odrive  
 
-      connecting  GND in Ardunio uno to  GND  in Odrive  
+      connecting  GND in Ardunio mega to  GND  in Odrive  
        
       connecting pin A in motor to M0  pin A  in Odrive
     
@@ -105,18 +105,6 @@ Project is created with:
       
 
  
- ### 3. BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver 
- 
-     connecting pin6 in Ardunio to -DIR in DM860A 
-     connecting pin7 in Ardunio to -PUL in DM860A
-     connecting +5v output in Ardunio to +PUL & +DIR in DM860A
-     connecting pin2 in Ardunio to one side of push button and also the 10 K ohm resistor connection up to the +5v on the arduino 
-     connecting GND in Ardunio to the other side of push button
-     connecting GND in Ardunio to the one side of potentiometer
-     connecting +5v in Ardunio to the other side of potentiometer
-     connecting pin A0 in Ardunio to the signal of potentiometer
-     connecting the motor driver with 24v battery
-     
      
 ## Block diagram & simulation
 ### 1. Brushless Motor A2212 Controlled by Arduino  Uno and ESC 
@@ -124,11 +112,17 @@ Project is created with:
 ![Untitled Sketch 4_bb](https://user-images.githubusercontent.com/64277741/179435815-1bd9a5ea-6ab4-4b05-a3c1-88ec4007e8c9.png)
 
 
-Figure (5): Block diagram and Connections of Brushless Motor A2212
+Figure (1): Block diagram and Connections of Brushless Motor A2212
 
 
 
 #### The Code 
+
+
+select in Arduino IDE tools> board >  Arduino uno ,
+ select in Arduino IDE tools> port > select the port ,
+ then uploud the code to Arduino uno 
+ 
  #include <Servo.h>  //Using servo library to control ESC
 
 Servo esc; //Creating a servo class with name as esc
@@ -159,92 +153,138 @@ esc.writeMicroseconds(val); //using val as the signal to esc
 
 }
 
-### 2. Bipolar Stepper with L293D Motor Driver IC .[see here ](https://github.com/Wafaa-Almadhoun/Stepper-motor-using-Arduino-UNO-R3-/blob/main/Bipolar%20Stepper%20with%20L293D%20Motor%20Driver%20IC.pdsprj)
-![1](https://user-images.githubusercontent.com/64277741/179328636-268173e6-09b8-46fb-9431-1dfe2eae640f.PNG)
-Figure (7): step one revolution in the other direction ("counterclockwise")
+### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive
+![11](https://user-images.githubusercontent.com/64277741/179448376-8f427cc7-c8f6-40b6-ac82-e82866ad997f.png)
 
- ![2](https://user-images.githubusercontent.com/64277741/179328701-3dee3532-ada8-4ae9-abdd-f15dcee8762f.PNG)
-Figure (8): step one revolution in one direction ("clockwise")
+Figure (2): Block diagram and Connections of Brushless Motor D5065
+
 
 #### The code 
-
-// Include the Arduino Stepper Library
-#include <Stepper.h>
-
-// Number of steps per output rotation NEMA 17
-
-const int stepsPerRevolution = 200; 
-
-// Create Instance of Stepper library
-
-Stepper myStepper(stepsPerRevolution, 12, 11, 10, 9);
-
-
-void setup()
-{
-  // set the speed at 20 rpm:
-  
-  myStepper.setSpeed(20);
-  
-}
-
-void loop() 
-{
-  // step one revolution in one direction:
-  
-  myStepper.step(stepsPerRevolution);
-  
-  delay(1000);
-
-  // step one revolution in the other direction:
-  
-  myStepper.step(-stepsPerRevolution);
-  
-  delay(1000);
-}
-
-
-### 3. BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver  
-![3BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver](https://user-images.githubusercontent.com/64277741/179338072-d89222ff-f4ea-4005-a69e-4427b546f48d.png)
-
-#### The Code 
-// Defin pins
+you have to download ODriveArduino and HardwareSerial library 
+ and select in Arduino IDE tools> board >  Arduino mega ,
+ select in Arduino IDE tools> port > select the port ,
+ then uploud the code to Arduino mega
  
-int reverseSwitch = 2;  // Push button for reverse
-int driverPUL = 7;    // PUL- pin
-int driverDIR = 6;    // DIR- pin
-int spd = A0;     // Potentiometer
- 
-// Variables
- 
-int pd = 500;       // Pulse Delay period
-boolean setdir = LOW; // Set Direction
- 
-// Interrupt Handler
- 
-void revmotor (){
- 
-  setdir = !setdir;
-  
-}
- 
- 
+
+#include <HardwareSerial.h>
+#include <SoftwareSerial.h>
+#include <ODriveArduino.h>
+// Printing with stream operator helper functions
+template<class T> inline Print& operator <<(Print &obj,     T arg) { obj.print(arg);    return obj; }
+template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(arg, 4); return obj; }
+
+
+////////////////////////////////
+// Set up serial pins to the ODrive
+////////////////////////////////
+
+// Below are some sample configurations.
+// You can comment out the default Teensy one and uncomment the one you wish to use.
+// You can of course use something different if you like
+// Don't forget to also connect ODrive GND to Arduino GND.
+
+// Teensy 3 and 4 (all versions) - Serial1
+// pin 0: RX - connect to ODrive TX
+// pin 1: TX - connect to ODrive RX
+// See https://www.pjrc.com/teensy/td_uart.html for other options on Teensy
+HardwareSerial& odrive_serial = Serial1;
+
+// Arduino Mega or Due - Serial1
+// pin 19: RX - connect to ODrive TX
+// pin 18: TX - connect to ODrive RX
+// See https://www.arduino.cc/reference/en/language/functions/communication/serial/ for other options
+// HardwareSerial& odrive_serial = Serial1;
+
+// Arduino without spare serial ports (such as Arduino UNO) have to use software serial.
+// Note that this is implemented poorly and can lead to wrong data sent or read.
+// pin 8: RX - connect to ODrive TX
+// pin 9: TX - connect to ODrive RX
+// SoftwareSerial odrive_serial(8, 9);
+
+
+// ODrive object
+ODriveArduino odrive(odrive_serial);
+
 void setup() {
- 
-  pinMode (driverPUL, OUTPUT);
-  pinMode (driverDIR, OUTPUT);
-  attachInterrupt(digitalPinToInterrupt(reverseSwitch), revmotor, FALLING);
-  
-}
- 
-void loop() {
-  
-    pd = map((analogRead(spd)),0,1023,2000,50);
-    digitalWrite(driverDIR,setdir);
-    digitalWrite(driverPUL,HIGH);
-    delayMicroseconds(pd);
-    digitalWrite(driverPUL,LOW);
-    delayMicroseconds(pd);
- 
+  // ODrive uses 115200 baud
+  odrive_serial.begin(115200);
+
+  // Serial to PC
+  Serial.begin(115200);
+  while (!Serial) ; // wait for Arduino Serial Monitor to open
+
+  Serial.println("ODriveArduino");
+  Serial.println("Setting parameters...");
+
+  // In this example we set the same parameters to both motors.
+  // You can of course set them different if you want.
+  // See the documentation or play around in odrivetool to see the available parameters
+  for (int axis = 0; axis < 2; ++axis) {
+    odrive_serial << "w axis" << axis << ".controller.config.vel_limit " << 10.0f << '\n';
+    odrive_serial << "w axis" << axis << ".motor.config.current_lim " << 11.0f << '\n';
+    // This ends up writing something like "w axis0.motor.config.current_lim 10.0\n"
+  }
+
+  Serial.println("Ready!");
+  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
+  Serial.println("Send the character 's' to exectue test move");
+  Serial.println("Send the character 'b' to read bus voltage");
+  Serial.println("Send the character 'p' to read motor positions in a 10s loop");
 }
 
+void loop() {
+
+  if (Serial.available()) {
+    char c = Serial.read();
+
+    // Run calibration sequence
+    if (c == '0' || c == '1') {
+      int motornum = c-'0';
+      int requested_state;
+
+      requested_state = AXIS_STATE_MOTOR_CALIBRATION;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      if(!odrive.run_state(motornum, requested_state, true)) return;
+
+      requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      if(!odrive.run_state(motornum, requested_state, true, 25.0f)) return;
+
+      requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL;
+      Serial << "Axis" << c << ": Requesting state " << requested_state << '\n';
+      if(!odrive.run_state(motornum, requested_state, false /*don't wait*/)) return;
+    }
+
+    // Sinusoidal test move
+    if (c == 's') {
+      Serial.println("Executing test move");
+      for (float ph = 0.0f; ph < 6.28318530718f; ph += 0.01f) {
+        float pos_m0 = 2.0f * cos(ph);
+        float pos_m1 = 2.0f * sin(ph);
+        odrive.SetPosition(0, pos_m0);
+        odrive.SetPosition(1, pos_m1);
+        delay(5);
+      }
+    }
+
+    // Read bus voltage
+    if (c == 'b') {
+      odrive_serial << "r vbus_voltage\n";
+      Serial << "Vbus voltage: " << odrive.readFloat() << '\n';
+    }
+
+    // print motor positions in a 10s loop
+    if (c == 'p') {
+      static const unsigned long duration = 10000;
+      unsigned long start = millis();
+      while(millis() - start < duration) {
+        for (int motor = 0; motor < 2; ++motor) {
+          Serial << odrive.GetPosition(motor) << '\t';
+        }
+        Serial << '\n';
+      }
+    }
+  }
+}
+
+	  
