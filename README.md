@@ -49,8 +49,13 @@ Project is created with:
   Breadboard and Jump Wires …
   
  ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
- 
-    
+  1- DUAL SHAFT MOTOR - D5065 270KV
+  
+  2-  HSA50R47J Resistor, Solder Lug, 0.47 ohm, HS Series, 50 W, ± 5%, Solder Lug, 1.25 kV
+  
+  3- Orive v3.2 controller 
+  
+  4- power supplay 24v 
 ## Connections
 
 ### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
