@@ -114,7 +114,16 @@ Project is created with:
 
 Figure (1): Block diagram and Connections of Brushless Motor A2212
 
+#### algorithm.
 
+Wiring up the Circuit
+First, connect the three terminals of Brushless motor to the three terminals of the ESC.Screw the Motor to a heavy wooden plank anything similar so that it remains stable at high RPM.Download and Flash the code available at the bottom of the page to the Arduino using a USB cable(Code is explained in the further part of this page). Connect the signal wire of ESC mostly white or yellow color to any PWM pin, Arduino, I connected it to the D8 pin and specified it a Pin 8 in the Arduino Sketch.You can use more than one pins for controlling many motors.
+
+Connect the Potentiometer to the VCC or 5v pin of the Arduino and the Ground.
+
+Connect the third terminal that is the variable pin to the Analog pin A0 You can power the Arduino using the BEC(Battery Eliminator Circuit)Present in your ESC.To use the BEC just connect the red thick wire to the Vin Pin of Arduino.It can provide 5V. Not all ESC’s have a BEC, in this case, you can use an external 5v power supply.After Powering the Arduino now connect the Lipo battery to your ESC.
+
+You are Done!!Now slowly turn the Potentiometer Knob to start and increase the speed of the Motor.
 
 #### The Code 
 
