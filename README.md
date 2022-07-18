@@ -23,7 +23,7 @@
   ,We will cover several topics : 👍 
 
 
- 1. Brushless Motor A2212 Controlled by Arduino and ESC .
+ 1. Brushless Motor A2212 Controlled by Arduino  Uno and ESC .
  2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
   
 
@@ -34,21 +34,22 @@ Project is created with:
 
 	
 ## Components required
-### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
+### 1. Brushless Motor A2212 Controlled by Arduino Uno and  ESC 
 
-  Brushless Motor A2212
+ 1- Brushless Motor A2212
   
-  ESC 30A 
+ 2-  ESC 30A 
   
-  Li-Po battery 3 cells 
+ 3- Li-Po battery 3 cells 
   
-  Arduino Board 
+ 4- Arduino  uno Board 
   
-  10 k ohm Potentiometer 
+ 5- 10 k ohm Potentiometer 
   
-  Breadboard and Jump Wires …
+ 6- Breadboard and Jump Wires …
   
  ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
+ 
   1- DUAL SHAFT MOTOR - D5065 270KV
   
   2-  HSA50R47J Resistor, Solder Lug, 0.47 ohm, HS Series, 50 W, ± 5%, Solder Lug, 1.25 kV
@@ -56,9 +57,12 @@ Project is created with:
   3- Orive v3.2 controller 
   
   4- power supplay 24v 
+  
+  5- caples connection 
+  
 ## Connections
 
-### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
+### 1. Brushless Motor A2212 Controlled by Arduino Uno and ESC 
 
      connect the three terminals of Brushless motor to the three terminals of the ESC
      
@@ -83,15 +87,23 @@ Project is created with:
      
  ### 2. Brushless DUAL SHAFT MOTOR - D5065 270KV Controlled by Arduino and Odrive .
  
-    connecting 5V output on Arduino to the Vcc2 & Vcc1 pins
+      connecting pin18 in Ardunio uno to GPIO 2  in Odrive  
+
+      connecting pin19 in Ardunio uno to GPIO 1  in Odrive  
+
+      connecting  GND in Ardunio uno to  GND  in Odrive  
+       
+      connecting pin A in motor to M0  pin A  in Odrive
     
-    Connect ground to ground.
-    
-    connect the input pins(IN1, IN2, IN3 and IN4) of the L293D IC to 
-    
-    four digital output pins(12, 11, 10 and 9) on Arduino
-    0ne coil of stepper moter connecting to Out1 & Out2 and the anthor coil connecting to Out3 & Out4
-    
+      connecting pin B in motor to M0  pin B  in Odrive
+     
+      connecting pin c in motor to M0  pin c  in Odrive
+      
+      connecting AUX + -  in Odrive with the resistor  
+
+      connecting DC + -  in Odrive with the power supplay
+      
+
  
  ### 3. BIG Stepper Motors NEMA 23 Bipolar with DM860A Microstep Driver 
  
@@ -107,7 +119,7 @@ Project is created with:
      
      
 ## Block diagram & simulation
-### 1. Brushless Motor A2212 Controlled by Arduino and ESC 
+### 1. Brushless Motor A2212 Controlled by Arduino  Uno and ESC 
 
 ![Untitled Sketch 4_bb](https://user-images.githubusercontent.com/64277741/179435815-1bd9a5ea-6ab4-4b05-a3c1-88ec4007e8c9.png)
 
