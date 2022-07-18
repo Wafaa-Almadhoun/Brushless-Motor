@@ -1,5 +1,5 @@
-# Brushless-Motor
-# Stepper-motor-using-Arduino-UNO-R3-
+# Brushless-Motor-using-Arduino
+
 
 
 
@@ -193,7 +193,7 @@ HardwareSerial& odrive_serial = Serial1;
 // pin 19: RX - connect to ODrive TX
 // pin 18: TX - connect to ODrive RX
 // See https://www.arduino.cc/reference/en/language/functions/communication/serial/ for other options
-// HardwareSerial& odrive_serial = Serial1;
+HardwareSerial& odrive_serial = Serial1;
 
 // Arduino without spare serial ports (such as Arduino UNO) have to use software serial.
 // Note that this is implemented poorly and can lead to wrong data sent or read.
